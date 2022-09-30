@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
+
+<TextView
+android:layout_width="70dp"
+android:layout_height="24dp"
+android:text="Sahil Shah"
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintHorizontal_bias="0.498"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toTopOf="parent"
+app:layout_constraintVertical_bias="0.323" />
+
+<Button
+android:id="@+id/button1"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="mathematics"
+tools:layout_editor_absoluteX="133dp"
+tools:layout_editor_absoluteY="397dp" />
+
+<Button
+android:id="@+id/button2"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Button"
+tools:layout_editor_absoluteX="158dp"
+tools:layout_editor_absoluteY="341dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+kt file:
+package com.example.mp333 
+import androidx.appcompat.app.AppCompatActivity 
+import android.os.Bundle 
+import android.widget.Button 
+import android.widget.Toast 
+class MainActivity : 
+AppCompatActivity() 
+{ 
+override fun onCreate(savedInstanceState: Bundle?) 
+{ 
+super.onCreate(savedInstanceState) 
+setContentView(R.layout.activity_main) 
+val b1 = findViewById<Button>(R.id.button1) as Button 
+val b2 = findViewById<Button>(R.id.button2) as Button 
+b1?.setOnClickListener { 
+val tv = arithop(100, 200) Toast.makeText(this, tv, Toast.LENGTH_LONG).show() 
+} 
+b2?.setOnClickListener { 
+Toast.makeText(this, "+,-,*,/ are arithmatic operators", Toast.LENGTH_LONG).show() 
+} 
+} 
+fun arithop(num1:Int, num2:Int):String { 
+val add = num1+num2 
+return "$add" 
+} 
+}
