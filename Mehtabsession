@@ -1,0 +1,460 @@
+3rd
+write a c++ program to search an element in sigly linked list or one way linked list
+
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+template<typename type>
+class Linkedlist{
+struct Node{
+type data;
+Node* next;
+};
+Node* begin=NULL;
+public:
+void traverse(){
+if(begin=NULL)
+    cout<<"Empty..."<<endl;
+else{
+    Node*ptr=begin;
+    cout<<"\nList:";
+    while(ptr!=NULL){
+        cout<<"\t"<<ptr->data;
+    ptr=ptr->next;
+}
+}
+}
+void insertBeg(type x){
+Node*tmp=new Node;
+tmp->data=x;
+tmp->next=begin;
+begin=tmp;
+}
+void insertEnd(type x){
+Node*tmp=new Node;
+tmp->data=x;
+tmp->next=NULL;
+if(begin==NULL) begin=tmp;
+else{
+    Node*ptr=begin;
+    while(ptr->next !=NULL)
+        ptr=ptr->next;
+    ptr->next=tmp;
+}
+}
+void search(type val){
+ if(begin==NULL)
+    cout<<"Empty..."<<endl;
+ else{
+    int flag=0;
+    Node*ptr=begin;
+    while(ptr!=NULL){
+        if(ptr->data==val){
+            cout<<val<<"present at address:"<<ptr<<endl;
+            flag=1;
+        }
+        ptr=ptr->next;
+    }
+    if(flag==0)
+        cout<<val<<"NOT present";
+ }
+ }
+};
+int main(){
+system("cls");
+Linkedlist<int> obj;
+int val,ch;
+while(true){
+    cout<<"\n\nLinked list(1.insertBeg 2.insertEnd 3.search 4.exit):";
+    cin>>ch;
+    switch(ch){
+case 1:
+    cout<<"\n\tEnter integer:";
+    cin>>val;
+    obj.insertBeg(val);
+    break;
+case 2:
+    cout<<"\n\tEnter integer:";
+    cin>>val;
+    obj.insertEnd(val);
+    break;
+case 3:
+    cout<<"\n\tEnter integer to search:";
+    cin>>val;
+    obj.search(val);
+    break;
+case 4:
+    exit(0);
+    }
+    obj.traverse();
+}
+}
+
+
+
+
+4th
+write a c++ program sort doubly linked list or two way linked list
+
+
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+template<typename type>
+class DLinkedList {
+    struct Node {
+        type data;
+        Node *next;
+        Node *prev;
+} ;
+Node *begin=NULL, * end=NULL;
+public:
+void forward_traverse(){
+if (begin == NULL)
+cout<<"Empty ... "<<endl;
+else{
+Node *ptr=begin;
+cout<<"\nForward List:";
+while(ptr != NULL){
+cout<<"\t"<<ptr->data;
+ptr=ptr->next;
+}
+}
+}
+void backward_traverse(){
+    if(end == NULL)
+        cout<<"Empty ... "<<endl;
+    else{
+        Node *ptr=end;
+        cout<<"\nBackward List : ";
+        while(ptr != NULL){
+           cout<<"\t"<<ptr->data;
+           ptr=ptr->prev;
+        }
+    }
+}
+void insertBeg(type x){
+    Node *tmp=new Node;
+    tmp->prev=NULL;
+    tmp->data=x;
+    if (begin == NULL){
+    tmp->next=NULL;
+    end=tmp;
+}else{
+    tmp->next=begin;
+    begin->prev=tmp;
+}
+begin=tmp;
+}
+void insertEnd(type x){
+    Node *tmp=new Node;
+    tmp->data=x;
+    tmp->next=NULL;
+    if (end == NULL){
+    tmp->prev=NULL;
+    begin=end=tmp;
+}else{
+    tmp->prev=end;
+    end->next=tmp;
+}
+end=tmp;
+}
+void sortlist(){
+Node *i=begin, *j=NULL;
+type tmp;
+while(i!=NULL){
+    j=i->next;
+    while(j!=NULL){
+        if(i->data>j->data){
+            tmp=i->data;
+            i->data=j->data;
+            j->data=tmp;
+        }
+        j=j->next;
+    }
+    i=i->next;
+}
+}
+};
+int main(){
+system("cls");
+DLinkedList<int>obj;
+int val,ch;
+while(true){
+    cout<<"\nDoubly linked list(1.insertBeg 2.insertEnd 3.sort 4.exit):";
+    cin>>ch;
+switch(ch){
+case 1:
+     cout<<"\n\tEnter integer : ";
+     cin>>val;
+     obj. insertBeg (val) ;
+     break;
+case 2:
+    cout<<"\n\tEnter integer : ";
+    cin>>val;
+    obj. insertEnd (val) ;
+    break;
+case 3:
+    obj. sortlist () ;
+    break;
+case 4:
+     exit (0) ;
+}
+obj. forward_traverse () ;
+obj. backward_traverse () ;
+}
+return 0;
+}
+
+
+
+
+
+2nd
+write a c++ program to merge two sorted arrays into a single sorted array
+
+
+
+#include <iostream>
+#include<conio.h>
+using namespace std;
+int *merge(int A[],int lb1,int ub1,int B[],int lb2,int ub2){
+    int*c=new int[ub1+ub2+1];
+    int i=lb1;int j=lb2;int k=0;
+    while(i<=ub1 and j<=ub2){
+        if(A[i]<B[j]){
+            c[k]=A[i];i++;k++;
+        }
+        else{
+        c[k]=B[j];j++;k++;
+        }
+        }
+    if(i>ub1){
+        while(j<=ub2)
+            c[k]=B[j];j++;k++;
+
+    }
+    else if(j>ub2)
+        while(i<=ub1){
+            c[k]=A[i];i++;k++;
+
+    }
+    return c;
+    }
+
+void display(int A[],int lb,int ub){
+    for(int i=lb;i<=ub;i++){
+        cout<<A[i]<<" ";
+    }
+
+}
+int main(){
+    int x[]={10,20,30,40,50,100};
+    int y[]={0,5,15,25,35,45,55,65,75,85,95,100};
+    int ub1=6; int ub2=12;
+    cout<<"\nFirst Array:";
+    display(x,0,ub1);
+    cout<<"\nSecond Array:";
+    display(y,0,ub2);
+    int *z=merge(x,0,ub1,y,0,ub2);
+    cout<<"Merged Array: ";
+    display(z,0,ub1+ub2+1);
+    delete []x;
+    delete []y;
+    delete []z;
+    return 0;
+}
+
+
+
+
+5th
+push ,pop,peek,serching
+
+
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+template<class type>
+class Stack{
+private:
+int Max, Top;
+type *List;
+public:
+Stack(int stacksize){
+if(stacksize <=0){
+cout<<"Stack size cannot be -ve. Default size is 10";
+stacksize=10;
+}
+Max=stacksize;
+Top=-1;
+List = new type[Max];
+for (int i=0; i<Max; i++)
+List[i]=NULL;
+}
+~Stack(){
+delete []List;
+}
+bool isEmpty(){
+return(Top == -1);
+}
+bool isFull(){
+return(Top ==Max-1);
+}
+void push(type newitem){
+if(isFull())
+cout<<"Stack Overflow"<<endl;
+else{
+List[++Top] = newitem;
+}
+}
+void pop(){
+if(isEmpty())
+cout<<"Stack Underflow"<<endl;
+else
+Top--;
+}
+
+type peek(){
+if (isEmpty()){
+cout<<"Stack Underflow";
+return NULL;
+}
+else return List[Top];
+}
+void display(){
+cout<<"\nTop : "<<Top;
+cout<<"\nStack : ";
+for( int i=0; i<=Top; i++)
+cout<<List[i]<<"\t";
+}
+};
+int main(){
+Stack<int> obj(5);
+int ch, val;
+while(true){
+cout<<"\n\n\tStack Operations(1.push, 2.pop, 3.peek, 4.exit) :";
+cin>>ch;
+switch(ch){
+case 1:
+cout<<"\n\tEnter integer to push : ";
+cin>>val;
+obj.push(val);
+break;
+case 2:
+obj.pop();
+break;
+case 3:
+val=obj.peek();
+if(val != NULL)
+cout<<"\n\tTop element of the stack : "<<val;
+break;
+case 4:
+exit(0);
+}
+obj.display();
+}
+return 0;
+}
+
+
+
+
+
+1st
+searching,sorting,receving
+
+
+#include<iostream>
+#include<conio.h>
+using namespace std;
+void search(int A[],int n,int val){
+int flag=0;
+for(int i=0;i<n;i++){
+    if(A[i]==val){
+        cout<<val<<"present at loacation:"<<i<<endl;
+        flag=1;
+    }
+}
+if(flag==0)
+    cout<<val<<"not present in array";
+}
+int* sort(int A[],int n){
+int* B=new int[n];
+for(int i=0;i<n;i++) B[i]=A[i];
+int tmp;
+for(int i=0;i<n-1;i++){
+    for(int j=i+1;i<n;j++){
+        if(B[i]>B[j]){
+            tmp=B[i];
+            B[i]=B[j];
+            B[j]=tmp;
+        }
+    }
+}return B;
+}
+int* reverse(int A[], int n){
+    int* B=new int[n];
+    for (int i=0; i<n; i++)B[i]=A[i];
+    int tmp;
+    for (int i=0, j=n-1; i<n/2;i++, j -- ){
+            tmp=B[i];
+    B[i]=B[j];
+    B[j]=tmp;
+    }
+return B;
+}
+void display(int A[], int n){
+    for (int i=0; i<n; i++)
+        cout <<A[i]<<" ";
+}
+int main()
+{
+    int n;
+    system("cls");
+    cout <<"Enter size of array : ";
+    cin>>n;
+    int *A=new int[n];
+    cout <<"Enter "<<n<<" numbers ... \n";
+    for(int i=0; i<n;i++) cin>>A[i];
+    int ch;
+    int *X;
+    do{
+            cout <<"Original Array : ";
+    display(A,n);
+    cout<<"\nMenu(1.Search, 2.Sort 3.Reverse, 4.Exit)";
+    cout<<"\nEnter Choice";
+    cin>>ch;
+    switch(ch){
+        case 1:
+            int val;
+            cout <<"Enter no. to Search : ";
+            cin>>val;
+            search(A,n, val);
+            break;
+        case 2:
+            X=sort(A,n) ;
+            cout<<"\nSorted Array : ";
+            display(X,n);
+            delete []X;
+            break;
+        case 3:
+            X=reverse(A, n) ;
+            cout <<"\nReverse Array : ";
+            display(X,n) ;
+            delete []X;
+            break;
+        case 4:
+            cout<<"Stop Processing ... ";
+            break;
+            default:
+                cout<<"\nInvalid Entry! !!";
+    }
+                getch();
+                }
+                while(ch!=4);
+                delete []A;
+                return 0;
+
+}
+
