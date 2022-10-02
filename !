@@ -1,0 +1,127 @@
+1.Design a class that store the information of  three students and display the same.
+
+
+class students:
+    count = 0
+    def __init__(self, name):
+        self.name = name
+        self.marks = []
+        students.count = students.count + 1
+        
+    def enterMarks(self):
+        for i in range(3):
+            m = int(input("Enter the marks of %s in %d subject: "%(self.name, i+1)))
+            self.marks.append(m)
+            
+    def display(self):
+        print (self.name, "got ", self.marks)
+             
+name = input("Enter the name of Student: ")
+s1 = students(name)
+s1.enterMarks()
+s1.display()
+print ("")
+name = input("Enter the name of Student: ")
+s2 = students(name)
+s2.enterMarks()
+s2.display()
+print ("")
+name = input("Enter the name of Student: ")
+s3 = students(name)
+s3.enterMarks()
+s3.display()
+
+
+2.Write a Python program to Implement the concept of inheritance using python.
+
+class Person(object):
+    def __init__(self, name, id):
+        self.name = name
+        self.id = id
+ 
+    def Display(self):
+        print(self.name, self.id)
+        
+emp = Person("Sahil", 7)
+emp.Display()
+
+
+3. Create a class called Numbers, which has a single class attribute called MULTIPLIER, and a constructor which takes the parameters x and y (these should all be numbers). 
+Write a method called add which returns the sum of the attributes x and y. 
+Write a class method called multiply, which takes a single number parameter an and returns the product of a and MULTIPLIER. 
+Write a static method called subtract, which takes two number parameters, b and c, and returns b - c.
+
+
+class Numbers:
+    MULTIPLIER=3.5
+ 
+    def __init__(self,x,y):
+        self.x=x
+        self.y=y
+ 
+    def add(self):
+        return self.x+self.y
+ 
+    @classmethod
+    def multiply(cls,a):
+        return cls.MULTIPLIER*a
+ 
+    @staticmethod
+    def subtract(b,c):
+        return b-c
+ 
+    @property
+    def value(self):
+        return (self.x,self.y)
+ 
+    #setter
+    def set_value(self,x,y):
+        self.x=x
+        self.y=y
+ 
+    #deleter
+    def del_value(self):
+            del self.x
+            del self.y
+ 
+obj1=Numbers(10,20)
+ 
+print("add",obj1.add())
+ 
+# invoke class method
+print("mulyiply",Numbers.multiply(10))
+ 
+# invoke static method
+print("subtract ",Numbers.subtract(10,5))
+ 
+#invoked property
+print("property ",obj1.value)
+ 
+#invoked setter
+print(obj1.set_value(100,200))
+ 
+#invoked property
+print("property ",obj1.value)
+ 
+#invoked deletor
+print(obj1.del_value())
+
+
+4.Create a class called Numbers, which has a  constructor which takes the parameters x and y (these should all be numbers). 
+Write a method called add which returns the sum of the attributes x and y. 
+
+
+class Values():
+    def __init__(self, x = 0, y=0):
+        self.x_value = x
+        self.y_value = y
+ 
+class Add(Values):
+    def __init__(self, x = 0, y=0):
+        Values.__init__(self, x, y)
+ 
+    def forward(self):
+        return (self.x_value + self.y_value)
+ 
+add = Add(x = 34, y = 35)
+print (add.forward())
