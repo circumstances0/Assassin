@@ -1,0 +1,185 @@
+1) Program to display the Fibonacci sequence up to n-th term
+
+nterms = int(input("How many terms? "))
+
+# first two terms
+n1, n2 = 0, 1
+count = 0
+
+# check if the number of terms is valid
+if nterms <= 0:
+   print("Please enter a positive integer")
+# if there is only one term, return n1
+elif nterms == 1:
+   print("Fibonacci sequence upto",nterms,":")
+   print(n1)
+# generate fibonacci sequence
+else:
+   print("Fibonacci sequence:")
+   while count < nterms:
+       print(n1)
+       nth = n1 + n2
+       # update values
+       n1 = n2
+       n2 = nth
+       count += 1
+
+
+
+
+2)Write a program that reverses the user defined value and check whether that number is palindrome or not.
+n=int(input("Enter number:"))
+temp=n
+rev=0
+while(n>0):
+    dig=n%10
+    rev=rev*10+dig
+    n=n//10
+if(temp==rev):
+    print("The number is a palindrome!")
+else:
+    print("The number isn't a palindrome!")
+
+
+
+
+
+
+3)find a factorial
+
+num = int(input("Enter a number: "))    
+factorial = 1    
+if num < 0:    
+   print(" Factorial does not exist for negative numbers")    
+elif num == 0:    
+   print("The factorial of 0 is 1")    
+else:    
+   for i in range(1,num + 1):    
+       factorial = factorial*i    
+   print("The factorial of",num,"is",factorial)  
+
+
+
+
+4 ).Define a procedure histogram() that takes a list of integers and prints ahistogram to the screen. For example, histogram([4,9,7]) should print thefollowing:
+****
+*********
+*******
+def histogram(inlist):
+for i in range(len(inlist)):
+print(inlist[i]*'*')
+List=[4,9,7]
+histogram(List
+
+
+
+5)
+B. Define a function that computes the length of a given list or string.
+
+def callen(n):
+count=0
+for i in n:
+count=count+1
+return count
+print("length of list is ",callen([1,2,3,4,5]))
+print("length of string is ",callen("Janhavi"))
+OUTPUT
+length of list is 5
+length of string is 7
+
+
+
+
+6)B. Take a list, say for example this one:
+
+A=[1,1,2,3,5,8,13,21,34,55,89]
+and write a program that prints out all the elements of the list that are less than 5.
+Solution:
+a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+for num in a:
+if num <5:
+print (num)
+OUTPUT
+1
+1
+2
+3
+
+7)A. Write a Python script to sort (ascending and descending) a dictionary by value.
+import operator
+d={1:'c',2:'b',3:'a'}
+print(d)
+s=sorted(d.items(),key=operator.itemgetter(0))
+print(s)
+s=sorted(d.items(),key=operator.itemgetter(0),reverse=True)
+print(s)
+
+
+B.Write a Python script to concatenate following dictionaries to create a new one. 
+Sample Dictionary : dic1={1:10, 2:20} dic2={3:30, 4:40} dic3={5:50,6:60}
+dic1={1:10,2:20}
+dic2={3:30,4:40}
+dic3={5:50,6:60}
+dic1.update(dic2)
+dic1.update(dic3)
+print(dic1)
+
+
+
+
+C. Write a Python program to sum all the items in a dictionary.
+my_dict = {'data1':100,'data2':50,'data3':40}
+print(sum(my_dict.values()))
+my_dict = {'data1':100,'data2':50,'data3':40}
+print(sum(my_dict.values()))
+
+
+8)
+
+A. Write a program that takes two lists and returns True if they have at least one 
+common member. 
+
+def common_data(list1, list2):
+ result = False
+ for x in list1:
+ for y in list2:
+ if x == y:
+ result = True
+ return result
+print(common_data([1,2,3,4,5], [5,6,7,8,9]))
+print(common_data([1,2,3,4,5], [6,7,8,9]))
+Output:
+True
+None
+
+
+
+
+B. Write a Python program to print a specified list after removing the 0th, 2nd, 4th 
+and 5th elements 
+
+list = ['Red', 'Green', 'White', 'Black', 'Pink', 'Yellow']
+newlist = []
+for i in list:
+ if list.index(i) == 1 or list.index(i) == 3:
+ newlist.append(i)
+print(newlist)
+output:
+['Green', 'Black']
+
+
+c) C. Write a Python program to clone or copy a list 
+L1=[8,16,17]
+L2=list(L1)
+print("L1 :",L1)
+print("L2 :",L2)
+Output
+L1 : [8, 16, 17]
+L2 : [8, 16, 17]
+
+
+
+
+
+
+

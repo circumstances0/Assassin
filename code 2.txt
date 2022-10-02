@@ -1,0 +1,208 @@
+1) Write a Python program to read an entire text file.
+#abc.txt
+Hello World In Python
+#f1.py
+f=open(‘abc.txt’,’r’)
+t=f.read()
+print(t)
+f.close()
+OUTPUT:
+Hello World
+In python
+
+
+2)
+b. Write a Python program to append text to a file and display the text .
+f=open(‘abc.txt’,’a+’)
+f.write(‘Easy to learn\n’)
+f=open(‘abc.txt’,’r’)
+t=f.read()
+print(t)
+f.close()
+OUTPUT:
+Hello World
+In python Easy to learn
+Easy to learn
+
+c.Write a Program to write the content to a text file
+f=open("abc.txt","w")
+x="hi"
+f.write(x)
+f.write("\n")
+f.write("vsit")
+print("content copied")
+f.close()
+
+d. Write a program to accept the name from user and write it in file
+f=open("abc1.txt","w")
+x=input("enter the name")
+f.write(x)
+print("content copied")
+f.close()
+
+e. Write a program to accept employee name and salary from user and write the content in file
+name=input("enter name")
+salary=input("enter salary")
+f=open("employee.txt","w")
+f.write(name + " " +salary )
+print("content copied")
+f.close()
+
+
+2) write a program to implement exeception handling
+"""try:
+num=int(input("Enter the number"))
+re=100/num
+except(ValueError,ZeroDivisionError):
+print("something is wrong")
+else:
+print("Result is : ",re)"""
+
+
+
+
+
+
+
+3) write a python program to creatwe a simple gui
+
+import tkinter as tk #importing tkinter module and aliasing it as tk
+w=tk.Tk() #creating an instance of the Tk
+w.title("1st GUI app") #Adding title to the window
+w.mainloop() #start GUI
+
+
+
+4) write a program to create a gui using pack(), grid(), label
+
+import tkinter as tk
+from tkinter import *
+w1=tk.Tk()
+w1.title('My App')
+l1=tk.Label(w1,text='Enter Number',bg='red',height=5,width=10,fg='white')
+l1.pack()#it organize widgets in blocks before placing them in parent window
+w1.mainloop()
+
+
+
+5) write a python program to use a button widgets
+#use of button widget
+from tkinter import *
+root=Tk()
+def callback():
+ print("click")
+b1=Button(root,text="one",bg="yellow",command=callback)
+b1.grid(row=0,column=1)
+root.mainloop()
+
+
+6) write a program for entry widgets
+
+from tkinter import *
+w=Tk()
+def put():
+ print(E1.get())
+L1 = Label(w, text="User Name")
+L1.grid(row=1,column=1)
+E1 = Entry(w, bd =5)
+E1.grid(row=1,column=2)
+B1=Button(w,text='Insert',command=put)
+B1.grid(row=3,column=2)
+w.mainloop()
+
+1) Design a simple database application that stores the records and retrieve the same.
+from tkinter import *
+from tkinter import messagebox
+import pymysql
+def put (*args):# used to pass a variable number of arguments to a function
+con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+cur=con.cursor()
+cur.execute("insert into student(roll_no,name) values('"+rollnoEntry.get()+"', 
+'"+nameEntry.get()+"')")
+messagebox.showinfo("Record inserted")
+con.commit()
+con.close()
+root=Tk()
+root.title("insert data")
+rollnoEntry=Entry(root,width=7)
+nameEntry=Entry(root,width=7)
+rollnoEntry.grid(row=1,column=1)
+nameEntry.grid(row=2,column=1)
+Label(root,text='rollno').grid(row=1,column=0)
+Label(root,text='name').grid(row=2,column=0)
+Button(root,text='Insert',command=put).grid(row=3,column=0)
+root.mainloop()
+
+
+3. Design a database application to that allows the user to add, delete and modify the records.
+#PROGRAM:
+#database connectivity ,python and mysql
+from tkinter import *
+from tkinter import messagebox
+import pymysql
+def upd():
+con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+cur=con.cursor()
+str="update student set name='rupesh' where roll_no="+rollnoEntry.get()+""
+cur.execute(str)
+messagebox.showinfo("info msg","record updated")
+con.commit()
+con.close()
+def dele():
+con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+cur=con.cursor()
+str="delete from student where roll_no="+rollnoEntry.get()+""
+cur.execute(str)
+messagebox.showinfo("info msg","record deleted")
+con.commit()
+con.close()
+def put (*args):# used to pass a variable number of arguments to a function
+con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+cur=con.cursor()
+cur.execute("insert into student(roll_no,name)values('"+rollnoEntry.get()+"', 
+'"+nameEntry.get()+"')")
+messagebox.showinfo("info msg","Record inserted")
+con.commit()
+con.close()
+def get():
+con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+cur=con.cursor()
+cur.execute("select * from student")
+results=cur.fetchall()
+row=cur.fetchone()
+messagebox.showinfo("infomsg",results)
+con.close()
+root=Tk()
+root.title("insert data")
+rollnoEntry=Entry(root,width=7)
+nameEntry=Entry(root,width=7)
+rollnoEntry.grid(row=1,column=1)
+nameEntry.grid(row=2,column=1)
+Label(root,text='roll_no').grid(row=1,column=0)
+Label(root,text='name').grid(row=2,column=0)
+Button(root,text='Insert',command=put).grid(row=3,column=0)
+Button(root,text='Display',command=get).grid(row=3,column=1)
+Label(root,text='roll_no').grid(row=4,column=0)
+rollnoEntry=Entry(root,width=7)
+rollnoEntry.grid(row=4,column=1)
+Button(root,text='delete',command=dele).grid(row=5,column=0)
+Button(root,text='update',command=upd).grid(row=5,column=1)
+root.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
