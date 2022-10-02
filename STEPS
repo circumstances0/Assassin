@@ -1,0 +1,7 @@
+create database dre;
+use dre;
+create table student(roll_no int, name varchar(20));
+select * from student;
+select * from student;
+delete from student where roll_no = ---;
+delete from student where name = "--";
