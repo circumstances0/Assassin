@@ -1,0 +1,59 @@
+A. Write a function that takes a character (i.e. a string of length 1) and returns True if it is a vowel, False otherwise.
+
+def vowelChecker (inputChar): 
+if(inputChar == "a" or inputChar == "A" or 
+ 
+inputChar == "e" or inputChar == "E" or 
+ 
+inputChar == "i" or inputChar == "I" or 
+ 
+inputChar == "o" or inputChar == "O" or 
+ 
+inputChar == "u" or inputChar == "U"): 
+ 
+  return "True" 
+ 
+else: 
+ 
+  return "False" 
+ 
+print ("Enter the string to check") 
+ 
+inputChar = input() 
+ 
+if vowelChecker(inputChar) == "True": 
+ 
+print("The enterted character is Vowel") 
+ 
+else: 
+ 
+print("The enterted character is not Vowel")
+
+
+B. Define a function that computes the length of a given list or string.
+
+def callen(n):
+count=0
+for i in n:
+  count=count+1
+return count
+print("length of list is ",callen([1,2,3,4,5]))
+print("length of string is ",callen("Sahil"))
+
+
+
+c. Define a procedure histogram() that takes a list of integers and prints a
+histogram to the screen. For example, histogram([4,9,7]) should print the
+following:
+****
+*********
+*******
+
+
+Program:
+def histogram(inlist):
+for i in range(len(inlist)):
+     print(inlist[i]*'*')
+     
+List=[4,9,7]
+histogram(List)
