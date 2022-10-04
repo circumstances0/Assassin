@@ -1,0 +1,365 @@
+7)	Design an employee class for reading and displaying the employee information (employee ID and employee name) with the getInfo() and displayInfo() methods:
+
+
+#include<iostream>
+using namespace std;
+ 
+class Employee
+{
+    int empid;
+    char empname[20];
+    void getInfo()
+    {
+        cout<<"ID";
+        cin>>empid;
+        cout<<"Name:";
+        cin>>empname;
+    }
+public:
+    Employee()
+    {
+        getInfo();
+    }
+    void displayInfo()
+    {
+        cout<<"\n"<<empid<<"\t"<<empname;
+    }
+};
+ 
+int main()
+{
+    cout<<"Enter employee details of First Employee...\n";
+    Employee e1;
+    cout<<"Enter employee details of Second Employee..\n";
+    Employee e2;
+    cout<<"\n id \t Name";
+    e1.displayInfo();
+    e2.displayInfo();
+    return 0;
+}
+
+
+8)	Write a C++ to convert an infix expression to postfix expression using stack data structure:
+
+
+#include<bits/stdc++.h> 
+using namespace std; 
+int precedence(char m) 
+{ 
+  if(m == '^') 
+  return 3; 
+  else if(m == '*' || m == '/') 
+  return 2; 
+  else if(m == '+' || m == '-') 
+  return 1; 
+} 
+ 
+void infix_to_postfix(string t) 
+{ 
+  stack<char> s;
+  int l = t.length(); 
+  string ans; 
+  for(int i = 0; i < l; i++) 
+  { 
+    if((t[i] >= 'a' && t[i] <= 'z') || (t[i] >= 'A' && t[i] <= 'Z')) 
+        ans+=t[i]; 
+ 
+    else if(t[i] == '(') 
+        s.push('('); 
+        
+    else if(t[i] == ')') 
+    { 
+      while(s.top() != '(') 
+      { 
+        char c = s.top(); 
+        ans += c;
+        s.pop(); 
+           
+      } 
+      if(s.top() == '(') 
+      { 
+        char c = s.top(); 
+        s.pop(); 
+      } 
+    } 
+    else{ 
+      while(s.empty()==false && precedence(t[i]) <= precedence(s.top())) 
+      { 
+        char c = s.top(); 
+        ans += c; 
+        s.pop(); 
+      
+      } 
+      s.push(t[i]); 
+    } 
+ 
+  } 
+  
+  while(s.empty() == false) 
+  { 
+    char c = s.top(); 
+    ans += c; 
+    s.pop(); 
+    
+  } 
+  
+  cout << ans << endl; 
+}
+ 
+int main() 
+{ 
+  string s = "a+b*c"; 
+  infix_to_postfix(s); 
+  return 0; 
+}
+
+
+9)	Write a C++ program for the array implementation of queue data structure with insert enqueue , delete dequeue, getFront & traverse display operations:
+
+
+#include <iostream>
+using namespace std;
+ 
+int cqueue[5];
+int front = -1, rear = -1, n=5;
+ 
+void insertCQ(int val) {
+   if ((front == 0 && rear == n-1) || (front == rear+1)) {
+      cout<<"Queue Overflow \n";
+      return;
+   }
+   if (front == -1) {
+      front = 0;
+      rear = 0;
+   } else {
+      if (rear == n - 1)
+      rear = 0;
+      else
+      rear = rear + 1;
+   }
+   cqueue[rear] = val ;
+}
+void deleteCQ() {
+   if (front == -1) {
+      cout<<"Queue Underflow\n";
+      return ;
+   }
+   cout<<"Element deleted from queue is : "<<cqueue[front]<<endl;
+ 
+   if (front == rear) {
+      front = -1;
+      rear = -1;
+   } else {
+      if (front == n - 1)
+      front = 0;
+      else
+      front = front + 1;
+   }
+}
+void displayCQ() {
+   int f = front, r = rear;
+   if (front == -1) {
+      cout<<"Queue is empty"<<endl;
+      return;
+   }
+   cout<<"Queue elements are :\n";
+   if (f <= r) {
+      while (f <= r){
+         cout<<cqueue[f]<<" ";
+         f++;
+      }
+   } else {
+      while (f <= n - 1) {
+         cout<<cqueue[f]<<" ";
+         f++;
+      }
+      f = 0;
+      while (f <= r) {
+         cout<<cqueue[f]<<" ";
+         f++;
+      }
+   }
+   cout<<endl;
+}
+int main() {
+ 
+   int ch, val;
+   cout<<"1)Insert\n";
+   cout<<"2)Delete\n";
+   cout<<"3)Display\n";
+   cout<<"4)Exit\n";
+   do {
+      cout<<"Enter choice : "<<endl;
+      cin>>ch;
+      switch(ch) {
+         case 1:
+         cout<<"Input for insertion: "<<endl;
+         cin>>val;
+         insertCQ(val);
+         break;
+ 
+         case 2:
+         deleteCQ();
+         break;
+ 
+         case 3:
+         displayCQ();
+         break;
+ 
+         case 4:
+         cout<<"Exit\n";
+         break;
+         default: cout<<"Incorrect!\n";
+      }
+   } while(ch != 4);
+   return 0;
+}
+
+
+10)	 Write a C++ program to implement bubble sort:
+
+
+#include <iostream>
+using namespace std;
+void bubblesort(int arr[], int n)
+{
+    if (n == 0 || n == 1)
+    {
+        return;
+    }
+    for (int i = 0; i < n - 1; i++)
+    {
+        if (arr[i] > arr[i + 1])
+        {
+            swap(arr[i], arr[i + 1]);
+        }
+    }
+    bubblesort(arr, n - 1);
+}
+int main()
+{
+    int arr[5] = {2, 5, 1, 6, 9};
+    bubblesort(arr, 5);
+    for (int i = 0; i < 5; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    return 0;
+}
+
+
+11)	Write a C++ program to implement selection sort:
+
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void swap(int *xp, int *yp)
+{
+    int temp = *xp;
+    *xp = *yp;
+    *yp = temp;
+}
+void selectionSort(int arr[], int n)
+{
+    int i, j, min_idx;
+    for (i = 0; i < n-1; i++)
+    {
+        min_idx = i;
+        for (j = i+1; j < n; j++)
+        if (arr[j] < arr[min_idx])
+            min_idx = j;
+        if(min_idx!=i)
+            swap(&arr[min_idx], &arr[i]);
+    }
+}
+void printArray(int arr[], int size)
+{
+    int i;
+    for (i=0; i < size; i++)
+        cout << arr[i] << " ";
+    cout << endl;
+}
+int main()
+{
+    int arr[] = {64, 25, 12, 22, 11};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    selectionSort(arr, n);
+    cout << "Sorted array: \n";
+    printArray(arr, n);
+    return 0;
+}
+
+
+12)	Write a C++ program to implement merge sort:
+
+
+#include <iostream>
+using namespace std;
+ 
+void merge(int arr[], int p, int q, int r)
+{
+  int n1 = q - p + 1;
+  int n2 = r - q;
+  int L[n1], M[n2];
+  for (int i = 0; i < n1; i++)
+    L[i] = arr[p + i];
+  for (int j = 0; j < n2; j++)
+    M[j] = arr[q + 1 + j];
+  int i, j, k;
+  i = 0;
+  j = 0;
+  k = p;
+  while (i < n1 && j < n2)
+  {
+    if (L[i] <= M[j])
+    {
+      arr[k] = L[i];
+      i++;
+    }
+    else
+    {
+      arr[k] = M[j];
+      j++;
+    }
+    k++;
+  }
+  while (i < n1)
+  {
+    arr[k] = L[i];
+    i++;
+    k++;
+  }
+  while (j < n2)
+  {
+    arr[k] = M[j];
+    j++;
+    k++;
+  }
+}
+void mergeSort(int arr[], int l, int r)
+{
+  if (l < r)
+  {
+    int m = l + (r - l) / 2;
+    mergeSort(arr, l, m);
+    mergeSort(arr, m + 1, r);
+    merge(arr, l, m, r);
+  }
+}
+void printArray(int arr[], int size)
+{
+  for (int i = 0; i < size; i++)
+    cout << arr[i] << " ";
+  cout << endl;
+}
+ 
+int main()
+{
+  int arr[] = {6, 5, 12, 10, 9, 1};
+  int size = sizeof(arr) / sizeof(arr[0]);
+  mergeSort(arr, 0, size - 1);
+  cout << "Sorted array: \n";
+  printArray(arr, size);
+  return 0;
+}
