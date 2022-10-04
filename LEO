@@ -1,0 +1,525 @@
+1) Write a C++ program to merge two sorted arrays in a single sorted array.
+
+#include<iostream>
+#include<conio.h>
+using namespace std;
+
+int* merge(int A[], int lb1, int ub1, int B[], int lb2, int ub2)
+{
+    int *C=new int[ub1+ub2+1];
+    int i=lb1, j=lb2, k=0;
+    while(i<=ub1 and j<=ub2)
+    {
+        if(A[i]<B[j])
+        {
+            C[k]=A[i]; i++; k++;
+        }
+        else
+        {
+            C[k]=B[j]; j++; k++;
+        }
+    }
+    if(i>ub1)
+    {
+        while(j<ub2)
+        {
+            C[k]=B[j]; j++; k++;
+        }
+    }
+    else if(j>ub2)
+    {
+        while(i<=ub1)
+        {
+            C[k]=A[i]; i++; k++;
+        }
+    }
+    return C;
+}
+
+void display(int A[], int lb, int ub)
+{
+    for(int i=lb; i<=ub; i++)
+        cout<<A[i]<<" ";
+}
+
+int main()
+{
+    int X[]={10,20,30,40,50,100};
+    int Y[]={0,5,15,25,35,45,55,65,75,85,95,100};
+    int ub1=5, ub2=11;
+    cout<<"\nFirst Array:";
+    display(X,0,ub1);
+    cout<<"\nSecond Array:";
+    display(Y,0,ub2);
+    int *Z=merge(X,0,ub1,Y,0,ub2);
+    cout<<"\nMerged Array:";
+    display(Z,0,ub1+ub2);
+    delete []X;
+    delete []Y;
+    delete []Z;
+    getch();
+}
+
+
+
+3)	Write a C++ program to search an element in the single linked list.
+
+
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+template <typename type>
+
+class LinkedList
+{
+    struct Node
+    {
+        type data;
+        Node* next;
+    };
+    Node* begin=NULL;
+    public:
+        void traverse()
+        {
+            if(begin==NULL)
+                cout<<"Empty..."<<endl;
+            else
+            {
+                Node *ptr=begin;
+                cout<<"\nList:";
+                while(ptr!=NULL)
+                {
+                    cout<<"\t"<<ptr->data;
+                    ptr=ptr->next;
+                }
+            }
+        }
+
+        void insertBeg(type x)
+        {
+            Node *tmp=new Node;
+            tmp->data=x;
+            tmp->next=begin;
+            begin=tmp;
+        }
+
+        void insertEnd(type x)
+        {
+            Node *tmp=new Node;
+            tmp->data=x;
+            tmp->next=NULL;
+            if(begin==NULL) begin=tmp;
+            else
+            {
+                Node *ptr=begin;
+                while(ptr->next!=NULL)
+                    ptr=ptr->next;
+                ptr->next=tmp;
+            }
+        }
+
+        void search(type val)
+        {
+            if(begin==NULL)
+                cout<<"Empty..."<<endl;
+            else
+            {
+                int flag=0;
+                Node *ptr=begin;
+                while(ptr!=NULL)
+                {
+                    if(ptr->data==val)
+                    {
+                        cout<<val<<"Present at address:"<<ptr<<endl;
+                        flag=1;
+                    }
+                    ptr=ptr->next;
+                }
+                if(flag==0)
+                    cout<<val<<"Not present";
+            }
+        }
+};
+
+int main()
+{
+    system("cls");
+    LinkedList<int> obj;
+    int val, ch;
+    while(true)
+    {
+        cout<<"\n\tLinked List(1.insertBeg, 2.insertEnd, 3.Search, 4.Exit):";
+        cin>>ch;
+        switch(ch)
+        {
+        case 1:
+            cout<<"\n\tEnter integer:";
+            cin>>val;
+            obj.insertBeg(val);
+            break;
+        case 2:
+            cout<<"\n\tEnter integer:";
+            cin>>val;
+            obj.insertEnd(val);
+            break;
+        case 3:
+            cout<<"\n\tEnter integer:";
+            cin>>val;
+            obj.search(val);
+            break;
+        case 4:
+            exit(0);
+        }
+        obj.traverse();
+    }
+    return 0;
+}
+
+
+4)	Write a C++ program to sort doubly linked list or two way linked list.
+
+
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+template <typename type>
+
+class DLinkedList
+{
+    struct Node
+    {
+        type data;
+        Node *next;
+        Node *prev;
+    };
+    Node* begin=NULL, *end=NULL;
+    public:
+        void forward_traverse()
+        {
+            if(begin==NULL)
+                cout<<"Empty..."<<endl;
+            else
+            {
+                Node *ptr=begin;
+                cout<<"\nForward List:";
+                while(ptr!=NULL)
+                {
+                    cout<<"\t"<<ptr->data;
+                    ptr=ptr->next;
+                }
+            }
+        }
+
+        void backward_traverse()
+        {
+            if(end==NULL)
+                cout<<"Empty..."<<endl;
+            else
+            {
+                Node *ptr=end;
+                cout<<"\nBackward List:";
+                while(ptr!=NULL)
+                {
+                    cout<<"\t"<<ptr->data;
+                    ptr=ptr->prev;
+                }
+            }
+        }
+
+        void insertBeg(type x)
+        {
+            Node *tmp=new Node;
+            tmp->prev=NULL;
+            tmp->data=x;
+            if(begin==NULL)
+            {
+                tmp->next=NULL;
+                end=tmp;
+            }
+            else
+            {
+                tmp->next=begin;
+                begin->prev=tmp;
+            }
+            begin=tmp;
+        }
+
+        void insertEnd(type x)
+        {
+            Node *tmp=new Node;
+            tmp->data=x;
+            tmp->next=NULL;
+            if(end==NULL)
+            {
+                tmp->prev=NULL;
+                begin=end=tmp;
+            }
+            else
+            {
+                tmp->prev=end;
+                end->next=tmp;
+            }
+            end=tmp;
+        }
+
+        void sortlist()
+        {
+            Node *i=begin, *j=NULL;
+            type tmp;
+            while(i!=NULL)
+            {
+                j=i->next;
+                while(j!=NULL)
+                {
+                    if(i->data>j->data)
+                    {
+                        tmp=i->data;
+                        i->data=j->data;
+                        j->data=tmp;
+                    }
+                    j=j->next;
+                }
+                i=i->next;
+            }
+        }
+};
+
+int main()
+{
+    system("cls");
+    DLinkedList<int> obj;
+    int val, ch;
+    while(true)
+    {
+        cout<<"\n\tDLinked List(1.insertBeg, 2.insertEnd, 3.Sort, 4.Exit):";
+        cin>>ch;
+        switch(ch)
+        {
+        case 1:
+            cout<<"\n\tEnter integer:";
+            cin>>val;
+            obj.insertBeg(val);
+            break;
+        case 2:
+            cout<<"\n\tEnter integer:";
+            cin>>val;
+            obj.insertEnd(val);
+            break;
+        case 3:
+            obj.sortlist();
+            break;
+        case 4:
+            exit(0);
+        }
+        obj.forward_traverse();
+        obj.backward_traverse();
+    }
+    return 0;
+}
+
+
+5)	Write a C++ program array implementation of stack data structure with push, pop, peek and display operations. 
+
+
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+template<class type>
+
+class stack
+{
+    private:
+        int Max, Top;
+        type *List;
+    public:
+        stack(int stacksize)
+        {
+            if(stacksize<=0)
+            {
+                cout<<"Stack size cannot be negative. Default size is 10";
+                stacksize=10;
+            }
+            Max=stacksize;
+            Top=-1;
+            List=new type(Max);
+            for(int i=0; i<Max; i++)
+                List[i]=NULL;
+        }
+
+        ~stack()
+        {
+            delete []List;
+        }
+        bool isEmpty()
+        {
+            return(Top==-1);
+        }
+        bool isFull()
+        {
+            return(Top==Max-1);
+        }
+        void push(type newitem)
+        {
+            if(isFull())
+                cout<<"Stack Overflow"<<endl;
+            else
+            {
+                List[++Top]=newitem;
+            }
+        }
+        void pop()
+        {
+            if(isEmpty())
+                cout<<"Stack Underflow"<<endl;
+            else
+                Top--;
+        }
+        type peek()
+        {
+            if(isEmpty())
+            {
+                cout<<"Stack Underflow"<<endl;
+                return NULL;
+            }
+            else return List[Top];
+        }
+        void display()
+        {
+            cout<<"\nTop:"<<Top;
+            cout<<"\nStack:";
+            for(int i=0; i<Top; i++)
+                cout<<List[i]<<"\t";
+        }
+};
+
+int main()
+{
+    stack<int> obj(5);
+    int ch, val;
+    while(true)
+    {
+        cout<<"\n\tStack Operations(1.Push, 2.Pop, 3.Peek, 4.Exit):";
+        cin>>ch;
+        switch(ch)
+        {
+        case 1:
+            cout<<"\n\tEnter integer to push:";
+            cin>>val;
+            obj.push(val);
+            break;
+        case 2:
+            obj.pop();
+            break;
+        case 3:
+            val=obj.peek();
+            if(val!=NULL)
+                cout<<"\n\tTop element of the stack:"<<val;
+            break;
+        case 4:
+            exit(0);
+        }
+        obj.display();
+    }
+    return 0;
+}
+
+
+6)	Write a c++ program to create a single linked list, reverse list and display list.
+
+
+#include<iostream>
+#include<stdlib.h>
+ 
+using namespace std;
+template<typename type>
+class LinkedList
+{
+    struct Node
+    {
+        type data;
+        Node* next;
+    };
+    Node* begin=NULL;
+public:
+    void traverse()
+    {
+        if(begin==NULL)
+            cout<<"Empty..."<<endl;
+        else
+        {
+            Node *ptr=begin;
+            cout<<"\nList:";
+            while(ptr!=NULL)
+            {
+                cout<<"\t"<<ptr->data;
+                ptr=ptr->next;
+            }
+        }
+    }
+    void insertBeg(type x)
+    {
+        Node *tmp=new Node;
+        tmp->data=x;
+        tmp->next=begin;
+        begin=tmp;
+    }
+    void insertEnd(type x)
+    {
+        Node *tmp=new Node;
+        tmp->data=x;
+        tmp->next=NULL;
+        if(begin==NULL) begin=tmp;
+        else
+        {
+            Node *ptr=begin;
+            while(ptr->next!=NULL)
+                ptr=ptr->next;
+            ptr->next=tmp;
+        }
+    }
+    void reverse()
+    {
+        Node *current=begin;
+        Node *prev=NULL, *next=NULL;
+        while(current!=NULL)
+        {
+            next=current->next;
+            current->next=prev;
+            prev=current;
+            current=next;
+        }
+        begin=prev;
+    }
+};
+ 
+int main()
+{
+    system("cls");
+    LinkedList<int> obj;
+    int val,ch;
+    while(true)
+    {
+        cout<<"\n\tLinked List(1.insertBeg, 2.insertEnd, 3.reverse, 4.exit):";
+        cin>>ch;
+        switch(ch)
+        {
+        case 1:
+            cout<<"\n\tEnter integer:";
+            cin>>val;
+            obj.insertBeg(val);
+            break;
+        case 2:
+            cout<<"\n\tEnter integer:";
+            cin>>val;
+            obj.insertEnd(val);
+            break;
+        case 3:
+            obj.reverse();
+            break;
+        case 4:
+            exit(0);
+        }
+        obj.traverse();
+    }
+    return 0;
+}
